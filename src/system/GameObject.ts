@@ -1,6 +1,6 @@
 // Liberapp 2019 Tahiti Katagai
 
-// UnityのGameObjectライクなタスク管理クラス
+// UnityのGameObject(MonoBehaviour)ライクなタスク管理クラス
 //  update()に毎フレームの処理を書く
 //  オブジェクトを破棄するときはdestroy()を呼ぶ
 //  破棄のときに後処理が必要なら、onDestroy()に記述
