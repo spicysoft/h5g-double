@@ -3,8 +3,6 @@
 
 class Wave extends GameObject{
 
-    static hardRate:number;
-
     lanes:number[];
     mileage:number=0;
     milestone:number=0;
@@ -12,24 +10,30 @@ class Wave extends GameObject{
     constructor( lanes:number[] ) {
         super();
         this.lanes = lanes;
-        Wave.hardRate = 0;
+        Game.hard = 0;
     }
 
     update() {
-        // Wave.hardRate = Util.clamp( this.mileage / Util.h( 100 ), 0, 1 );
-        // const speed = Util.lerp( Util.h(1/120), Util.h(1/60), Wave.hardRate );
+        if( GameOver.I || StartMessage.I ){
+            Game.speed = 0;
+            return;
+        }
+        Game.speed = Util.lerp( Util.h(1/240), Util.h(1/60), Game.hard );
+        Game.hard = Util.clamp( this.mileage / Util.h( 100 ), 0, 1 );
 
-        // const camHead = Camera2D.y;
-        // if( camHead >= this.waveY ){
-        //     const lane = randI(0, 4);
-        //     this.newBlock( lane );            
-        //     Score.I.addPoint();
-        //     Wave.hardRate = Util.clamp( this.waveY / Util.width / 20, 0, 1 );
-        // }
-    }
-
-    newBlock( lane:number ){
-        // todo new Block on the lane
+        this.mileage += Game.speed;
+        
+        if( this.milestone <= this.mileage ){
+            this.milestone += Util.h(0.5);
+            
+            if( randBool(0.8) ){
+                new Block( this.lanes[randI(0, 4)], -Util.h(LANE_RADIUS_PER_H) );
+            }
+            else{
+                new Block( this.lanes[randI(0, 2)], -Util.h(LANE_RADIUS_PER_H) );
+                new Block( this.lanes[randI(2, 4)], -Util.h(LANE_RADIUS_PER_H) );
+            }
+        }
     }
 }
 

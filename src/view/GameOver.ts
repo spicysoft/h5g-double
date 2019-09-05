@@ -3,14 +3,24 @@
 
 class GameOver extends GameObject{
 
+    static I:GameOver = null;
     texts:egret.TextField[] = [];
     retryButton:Button = null;
     step:number = 0;
     readonly fadeInFrame:number = 64;
 
+    static Create():GameOver{
+        if( GameOver.I == null ){
+            Player.players.forEach( p2 => { p2.setStateMiss(); } );
+            new GameOver();
+        }
+        return GameOver.I;
+    }
+
     constructor() {
         super();
 
+        GameOver.I = this;
         this.texts[0] = Util.newTextField("SCORE : " + Score.I.point.toFixed(), Util.width / 12, FONT_COLOR, 0.5, 0.35, true, false);
         egret.Tween.get(this.texts[0],{loop:false})
             .to({alpha:0}, 0)
@@ -21,6 +31,7 @@ class GameOver extends GameObject{
     onDestroy() {
         this.texts.forEach( text =>{ GameObject.baseDisplay.removeChild( text ); });
         this.texts = null;
+        GameOver.I = null;
     }
     
     update() {

@@ -15,7 +15,7 @@ class Player extends GameObject{
     laneIndex:number = 0;
     radius:number;
     button:Button;
-    state:()=>void = this.stateRun;
+    state:()=>void = this.stateNone;
 
     constructor( px:number, py:number, anotherX:number ) {
         super();
@@ -26,8 +26,9 @@ class Player extends GameObject{
         this.radius = Util.w(PLAYER_RADIUS_PER_H);
         this.setDisplay( px, py );
 
-        let btnX = ( px < Util.w(0.5) ) ? 0.25 : 0.75;
-        this.button = new Button( null, 0, 0, btnX, 0.5, 0.5, 1, 0x000000, 0.0, null ); // 透明な半画面ボタン
+        const btnX = ( px < Util.w(0.5) ) ? 0.25 : 0.75;
+        const wide = 0.5;
+        this.button = new Button( null, 0, 0, btnX, 0.5, wide, 1, 0x000000, 0.0, null ); // 透明な半画面ボタン
     }
 
     onDestroy(){
@@ -54,8 +55,8 @@ class Player extends GameObject{
         this.state();
     }
 
-    // stateNone(){
-    // }
+    stateNone(){
+    }
 
     setStateRun(){
         this.state = this.stateRun;
@@ -68,7 +69,6 @@ class Player extends GameObject{
     setStateMiss(){
         if( this.state == this.stateMiss )
             return;
-        new GameOver();
         this.state = this.stateMiss;
     }
     stateMiss(){
