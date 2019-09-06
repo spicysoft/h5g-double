@@ -18,13 +18,14 @@ class Wave extends GameObject{
             Game.speed = 0;
             return;
         }
-        Game.speed = Util.lerp( Util.h(1/240), Util.h(1/60), Game.hard );
-        Game.hard = Util.clamp( this.mileage / Util.h( 100 ), 0, 1 );
+        Game.speed = Util.lerp( Util.h(1/150), Util.h(1/60), Game.hard );
+        Game.hard = Util.clamp( this.mileage / Util.h( 50 ), 0, 1 );
 
         this.mileage += Game.speed;
         
         if( this.milestone <= this.mileage ){
             this.milestone += Util.h(0.5);
+            Score.I.addPoint();
             
             if( randBool(0.8) ){
                 new Block( this.lanes[randI(0, 4)], -Util.h(LANE_RADIUS_PER_H) );

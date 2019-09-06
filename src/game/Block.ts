@@ -29,7 +29,7 @@ class Block extends GameObject{
         shape.y = y;
         shape.graphics.beginFill( BLOCK_COLOR );
         const size = Util.h(LANE_WIDTH_PER_H) * 0.9;
-        shape.graphics.drawRect( -0.5*size, -0.5*size, size, size );
+        shape.graphics.drawRoundRect( -0.5*size, -0.5*size, size, size, size*0.2 );
         shape.graphics.endFill();
     }
 

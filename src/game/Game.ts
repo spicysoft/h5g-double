@@ -1,9 +1,8 @@
 // Liberapp 2019 - Tahiti Katagai
 // ゲームシーン
 
-const PLAYER_RADIUS_PER_H = 1/16;
-const PLAYER_SPEED_PER_H = 1/25;
-const LANE_WIDTH_PER_H = 1/8;
+const PLAYER_RADIUS_PER_H = 1/28;
+const LANE_WIDTH_PER_H = 1/9;
 const LANE_RADIUS_PER_H = LANE_WIDTH_PER_H / 2;
 
 const SAVE_KEY_BESTSCORE = "double-bestScore";

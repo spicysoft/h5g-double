@@ -23,7 +23,7 @@ class Player extends GameObject{
         Player.players.push(this);
         this.laneX[1] = px;
         this.laneX[0] = anotherX;
-        this.radius = Util.w(PLAYER_RADIUS_PER_H);
+        this.radius = Util.h(PLAYER_RADIUS_PER_H);
         this.setDisplay( px, py );
 
         const btnX = ( px < Util.w(0.5) ) ? 0.25 : 0.75;
